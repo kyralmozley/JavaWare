@@ -10,10 +10,10 @@ import java.util.Base64;
 
 
 public class AES {
-    static String key = "W6kG$Uv+;XM7HK#!";
-    static String initVector = ")B5C*\\)<$xhXdq$d";
+    private String key = "W6kG$Uv+;XM7HK#!";
+    private String initVector = ")B5C*\\)<$xhXdq$d";
 
-    public static String encrypt(File inputFile) throws Exception {
+    public String encrypt(File inputFile) throws Exception {
         IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
         SecretKeySpec skeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 
@@ -34,7 +34,7 @@ public class AES {
         return Base64.getEncoder().encodeToString(encrypted);
     }
 
-    public static String decrypt(File encryptedFile) throws Exception {
+    public String decrypt(File encryptedFile) throws Exception {
         IvParameterSpec iv = new IvParameterSpec(initVector.getBytes("UTF-8"));
         SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes("UTF-8"), "AES");
 
@@ -56,16 +56,4 @@ public class AES {
 
     }
 
-    public static void main(String[] args) throws Exception {
-        /*
-        String originalString = "myPa$$w0rd";
-        System.out.println("Original String to encrypt - " + originalString);
-        String encryptedString = encrypt(originalString);
-        System.out.println("Encrypted String - " + encryptedString);
-        String decryptedString = decrypt(encryptedString);
-        System.out.println("After decryption - " + decryptedString);*/
-        File toEncrypt = new File(System.getProperty("user.home")+ File.separator + "Desktop" + File.separator + "test.rtf-Encrypted");
-        decrypt(toEncrypt);
-
-    }
 }

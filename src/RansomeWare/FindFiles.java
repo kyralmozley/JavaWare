@@ -76,14 +76,4 @@ public class FindFiles {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        FindFiles ff = new FindFiles();
-
-        long startTime = System.nanoTime();
-        ff.FindFiles();
-        long endTime = System.nanoTime();
-
-        System.out.println("Time: " + (endTime - startTime));
-        System.out.println(count);
-    }
 }
