@@ -19,7 +19,6 @@ DO NOT USE FOR MALICIOUS ACTIVITY
  *********************************************************************/
 package RansomeWare;
 
-import javafx.scene.control.Alert;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
