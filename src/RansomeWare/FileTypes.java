@@ -112,6 +112,7 @@ public class FileTypes {
         AllowedTypes.add(".EXIF");
         AllowedTypes.add(".GIF");
         AllowedTypes.add(".JNG");
+        AllowedTypes.add(".JPG");
         AllowedTypes.add(".JPEG");
         AllowedTypes.add(".PNG");
         AllowedTypes.add(".RAW");
@@ -122,6 +123,7 @@ public class FileTypes {
         AllowedTypes.add(".WAV");
         AllowedTypes.add(".WMA");
         AllowedTypes.add(".MP3");
+        AllowedTypes.add(".MP4");
         AllowedTypes.add(".MPEG");
         AllowedTypes.add(".LOGIC");
         AllowedTypes.add(".AUP");

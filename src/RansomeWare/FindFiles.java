@@ -36,7 +36,6 @@ public class FindFiles {
 
     public void FindFiles() throws Exception {
         //Use System Property rather than C:\\ to make it OS independent
-        //String home = System.getProperty("user.home");
 
         //FOR DEVELOPMENT - NOT READY TO ENCRYPT EVERYTHING - JUST THE DOCUMENTS FOLDER
         String home = System.getProperty("user.home")+ File.separator + "Desktop" + File.separator + "Documents";
@@ -65,11 +64,13 @@ public class FindFiles {
                 traverse(f.getAbsolutePath());
                 System.out.println("Dir:" + f.getAbsoluteFile());
             } else {
-                String[] fileAndExtension = f.getName().split("\\.");
-                if(fileAndExtension.length == 1) return;
+
+                //split to get file extension
+                int index = f.getName().lastIndexOf(".");
+                String fileName = f.getName().substring(index + 1);
 
                 //if file extension is allowed, write to file
-                if(allowedFiles.contains("." + fileAndExtension[1].toUpperCase())) {
+                if(allowedFiles.contains("." + fileName.toUpperCase())) {
                     System.out.println("File:" + f.getAbsoluteFile());
                     count++;
                     fileWriter.write(f.getAbsolutePath());

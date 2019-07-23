@@ -65,7 +65,7 @@ public class JavaWare {
 
     public static void main(String[] args) throws Exception {
         JavaWare jw = new JavaWare();
-        jw.DecryptFiles();
+        jw.EncryptFiles();
 
     }
 }
