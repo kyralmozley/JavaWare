@@ -45,7 +45,11 @@ public class AES {
         byte[] inputBytes = new byte[(int) encryptedFile.length()];
         in.read(inputBytes);
 
-        File outputFile = new File(encryptedFile + "-Decrypted");
+        String file = encryptedFile.toString();
+        int index = file.lastIndexOf("-Encrypted");
+        String originalName = file.substring(0, index);
+
+        File outputFile = new File(originalName);
 
         byte[] original = cipher.doFinal(Base64.getDecoder().decode(inputBytes));
         FileOutputStream out = new FileOutputStream(outputFile);

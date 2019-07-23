@@ -23,6 +23,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("MagicConstant")
 public class FileTypes {
     public List<String> AllowedTypes = new ArrayList<String>();
 
@@ -57,7 +58,7 @@ public class FileTypes {
         AllowedTypes.add(".TEX");
         AllowedTypes.add(".TSV");
         AllowedTypes.add(".INFO");
-        AllowedTypes.add("TXT");
+        AllowedTypes.add(".TXT");
         AllowedTypes.add(".XML");
 
         AllowedTypes.add(".AI");
@@ -140,10 +141,10 @@ public class FileTypes {
 
     }
 
-    public static void main(String[] args) {
-        FileTypes ft = new FileTypes();
-        ft.addFiles();
+    FileTypes() {
+        addFiles();
     }
+
 
 
 }

