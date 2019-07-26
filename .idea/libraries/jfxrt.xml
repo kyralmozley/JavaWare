@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="jfxrt">
     <CLASSES>
-      <root url="jar://$APPLICATION_HOME_DIR$/jre64/lib/ext/jfxrt.jar!/" />
+      <root url="file:///Library/Java/JavaVirtualMachines/javafx-sdk-11.0.2" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
