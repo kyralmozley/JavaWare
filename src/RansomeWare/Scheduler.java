@@ -1,8 +1,29 @@
+/********************************************************************
+     _____                        _        _
+    |_   _|                      | |      | |
+      | |   ___ _ __   __ ____ _ | |  __  | | ____ _ _ __  ___
+      | | /  _ ' |\ \ / //  _ ' || | /  \ | |/  _ ' | '__/  _  \
+    __/ / | (_)  | \ V / | (_)  |\ V  /\ V  /| (_)  | |  |  ___/
+   \__ /  \____,_|  \_/  \____,_| \__/ \__/  \____,_|_|  \_____|
+
+
+ Copyright (c) 2019 Kyra Mozley
+ Created on 05/08/19
+ Version 2.0
+
+ Disclaimer: This project is purely for educational purposes
+ DO NOT RUN THIS ON YOUR PERSONAL MACHINE
+ EXECUTE ONLY IN A TEST ENVIRONMENT
+ DO NOT USE FOR MALICIOUS ACTIVITY
+
+ *********************************************************************/
+
 package RansomeWare;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
@@ -14,6 +35,11 @@ public class Scheduler {
     private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
     ScheduledFuture<?> handler;
     private int count;
+    FileScore fs;
+
+    Scheduler() {
+        fs = new FileScore();
+    }
 
     public void function() throws Exception {
 
@@ -57,7 +83,8 @@ public class Scheduler {
             while((line = br.readLine()) != null) {
                 String[] nameLastMod = line.split(",");
                 File f = new File(nameLastMod[0]);
-                bw.write(line + ", " + f.lastModified());
+                double beta = fs.calculateBeta(f);
+                bw.write(line + ", " + beta);
                 bw.newLine();
             }
 
@@ -67,11 +94,6 @@ public class Scheduler {
         Files.copy(out.toPath(), in.toPath(), StandardCopyOption.REPLACE_EXISTING);
         out.delete();
         System.out.println("it worked");
-    }
-
-    public static void main(String[] args) throws Exception {
-        Scheduler s = new Scheduler();
-        s.function();
     }
 
 }
