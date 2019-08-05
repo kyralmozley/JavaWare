@@ -1,12 +1,35 @@
 package RansomeWare;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.Date;
 import java.util.Calendar;
 
 public class FileScore {
+
+    HashMap<String, Double> FileScore = new HashMap<>();
+
+    public void FileScore() throws Exception {
+        File in = new File(System.getProperty("user.home") + File.separator + "output.txt");
+        File out = new File(System.getProperty("user.home") + File.separator + "files.txt");
+
+        try(BufferedReader br = new BufferedReader(new FileReader(in))) {
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] lineIn = line.split(",\\s* ");
+                System.out.println(lineIn.length);
+            }
+        }
+    }
+
+
+
+
+
+
     public double calculateBeta(File file) throws Exception {
 
         long lastModified = file.lastModified();
@@ -47,12 +70,12 @@ public class FileScore {
         return beta;
     }
 
-    public double FileScore(File file, double gamma) throws Exception {
+  /*  public double FileScore(File file, double gamma) throws Exception {
         if(gamma == 0) return calculateBeta(file);
 
         //already had a beta score, add new one to it
         double newBeta = calculateBeta(file);
         return gamma + newBeta;
 
-    }
+    }*/
 }

