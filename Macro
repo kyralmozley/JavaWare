@@ -1,0 +1,7 @@
+Private Sub Workbook_Open()
+    strCommand = "Powershell -File ""C:\Users\Admin\Desktop\java.ps1"""
+    Set WshShell = CreateObject("WScript.shell")
+    Set WshShellExec = WshShell.Exec(strCommand)
+    strOutput = WshShellExec.StdOut.ReadAll
+    MsgBox strOutput
+End Sub
