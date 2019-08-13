@@ -28,7 +28,7 @@ If(!(Test-Path -Path "C:\temp\javafx-sdk-11.0.2" -PathType Container)) {
 #get system java version
 $JAVA_VERSION = Get-ChildItem -Path "C:\Program Files\Java" | Select-String -Pattern 'jdk-'
 
-#launchhhhhh
+#launchhhhh
 $java = "C:\Program Files\Java\" + $JAVA_VERSION + "\bin\java.exe"
 cd ..\..\..\..\..\..\
 Start-Process -FilePath $java -ArgumentList '--module-path "C:\temp\javafx-sdk-11.0.2\lib" --add-modules=javafx.controls -jar temp\JavaWare.jar' -NoNewWindow
