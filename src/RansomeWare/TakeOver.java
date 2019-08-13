@@ -100,8 +100,6 @@ public class TakeOver extends Application {
         gridPane.add(address, 0,4);
 
 
-        Button b = new Button("Decrypt");
-        gridPane.add(b, 1, 6);
 
         EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
             @Override
@@ -115,6 +113,8 @@ public class TakeOver extends Application {
             }
         };
 
+        Button b = new Button("Decrypt");
+        gridPane.add(b, 1, 6);
         b.setOnAction(event);
 
         primaryStage.show();
