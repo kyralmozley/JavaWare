@@ -1,11 +1,9 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="JavaWare:jar">
+  <artifact type="jar" name="JavaWare:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/JavaWare_jar</output-path>
     <root id="archive" name="JavaWare.jar">
-      <element id="directory" name="META-INF">
-        <element id="file-copy" path="$USER_HOME$/Desktop/META-INF/MANIFEST.MF" />
-      </element>
-      <element id="artifact" artifact-name="JavaWare" />
+      <element id="module-output" name="JavaWare" />
+      <element id="library" level="project" name="jfxrt" />
     </root>
   </artifact>
 </component>

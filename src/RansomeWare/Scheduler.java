@@ -93,7 +93,6 @@ public class Scheduler {
         //write back to output.txt
         Files.copy(out.toPath(), in.toPath(), StandardCopyOption.REPLACE_EXISTING);
         out.delete();
-        System.out.println("it worked");
     }
 
 }

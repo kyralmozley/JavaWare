@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="JavaWare">
-    <output-path>$PROJECT_DIR$/out/artifacts/JavaWare</output-path>
-    <root id="archive" name="JavaWare.jar">
-      <element id="module-output" name="JavaWare" />
-    </root>
-  </artifact>
-</component>
