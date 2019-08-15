@@ -11,9 +11,9 @@ JavaWare is a ransomware which will observe your system, learn which files you u
 ### How does it learn which files I use?
 > Maths. 
 
-### How does it encrypt?
+### How does it encrypt? :lock:
 > AES 128 bit Encryption in CBC Mode (Counter Block Mode ) PKCS5 Padding
-> *AES* is a symmetric encryption algorithm which works on blocks of a fixed size (16 bytes for AES128). *Padding* (PKCS5) is used if the block is less than 16 bytes long. We split the stream into 16 byte blocks, which is encrypted using AES and the result is XORed with the next block in the stream before it is encrypted. For the first block, it XORs it with an *initialization vector*, a random 16 byte value. 
+*AES* is a symmetric encryption algorithm which works on blocks of a fixed size (16 bytes for AES128). *Padding* (PKCS5) is used if the block is less than 16 bytes long. We split the stream into 16 byte blocks, which is encrypted using AES and the result is XORed with the next block in the stream before it is encrypted. For the first block, it XORs it with an *initialization vector*, a random 16 byte value. 
 
 ### What does it encrypt?
 > *FileTypes.java* defines what type of files to encrypt, it includes common document types and so will avoid program files to ensure your system is still functional. Similarly, *AvoidedDir.java* includes directories to avoid in traversal, such as *Windows* and *Program Files*. 
