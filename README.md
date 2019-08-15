@@ -1,6 +1,6 @@
-### JavaWare
+# JavaWare
 
-#Disclaimer
+### Disclaimer
 > I built this purely for **educational purposes**. I take no responsibility and/or liability for how you choose to use any of the code available here. If executing the ransomware, please do not do so on your own machine as it will encrypt your files. Although I did include a function to decrypt, I am in no way responsible. 
 ---
 Java Ransomware | FOR ACADEMIC PURPOSES ONLY 
