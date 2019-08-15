@@ -6,7 +6,7 @@
 
 JavaWare is a ransomware which will observe your system, learn which files you use, and then encrypt your machine. Once all files have been encrypted it will launch the payload screen. 
 
-![alt text](https://raw.githubusercontent.com/kyralmozley/JavaWare/V1.0/Screenshots/Capture.png "Launch Screen")
+![alt text](https://raw.githubusercontent.com/kyralmozley/JavaWare/V1.0/Screenshots/Pay Load.png "Launch Screen")
 
 ### How does it learn which files I use?
 >
