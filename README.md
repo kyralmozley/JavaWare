@@ -10,7 +10,7 @@ JavaWare is a ransomware which will observe your system, learn which files you u
 
 ### How does it learn which files I use?
 Maths. 
-It uses a metric called *freceny* (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
+It uses a metric called *freceny*[1] (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
 
 <img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
 <img src="http://latex.codecogs.com/gif.latex?\beta=p\cdot {e^{-a\lambda}}" border="0"/>
@@ -62,7 +62,8 @@ Start-Process -FilePath $java -ArgumentList '--module-path "C:\temp\javafx-sdk-1
 
 
 ### References:
-[\[1\]: Frecency Algorithm] (https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm) <br/> 
+[\[1\]: Fracency Algortihm](https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm) <br/>
+Gave me the idea to put my powershell code in the auhtor field, and other useful powershell commands.
 [\[2\]: The Increased Use of PowerShell in Attacks - Symantec](https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/increased-use-of-powershell-in-attacks-16-en.pdf) <br/>
 Gave me the idea to put my powershell code in the auhtor field, and other useful powershell commands.
 
