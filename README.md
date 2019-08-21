@@ -13,8 +13,15 @@ Maths.
 
 It uses a metric called *freceny*[1] (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
 
-<img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
-<img src="http://latex.codecogs.com/gif.latex?\beta=p\cdot {e^{-a\lambda}}" border="0"/>
+<p align="center">
+  <img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
+ </p>
+ <p align="center">
+  <img src="http://latex.codecogs.com/gif.latex?\beta=p\cdot {e^{-a\lambda}}" border="0"/>
+</p>
+<p align="center">
+<img src="http://latex.codecogs.com/gif.latex?\lambda=\frac{\ln 2}{30}" border="0"/>
+</p>
 
 Where <img src="http://latex.codecogs.com/gif.latex?p" border="0"/> is a recency weight, <img src="http://latex.codecogs.com/gif.latex?a" border="0"/> is a frequency ranking (the time since last modification in hours), and 
 <img src="http://latex.codecogs.com/gif.latex?\lambda" border="0"/> is a constant
@@ -29,7 +36,7 @@ Where <img src="http://latex.codecogs.com/gif.latex?p" border="0"/> is a recency
 | Last 90 Days  | 0.1   |
 | > 90 Days     | 0.0   |
 
-<img src="http://latex.codecogs.com/gif.latex?\lambda=\frac{\ln 2}{30}" border="0"/>
+
 
 ### :lock: How does it encrypt? 
 AES 128 bit Encryption in CBC Mode (Counter Block Mode ) PKCS5 Padding <br/>
