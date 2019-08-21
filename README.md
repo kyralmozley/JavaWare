@@ -14,10 +14,10 @@ Maths.
 It uses a metric called *frecency*[1] (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
 
 <p align="center">
-  <img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
+  <img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta_i" border="0"/>
  </p>
  <p align="center">
-  <img src="http://latex.codecogs.com/gif.latex?\beta=p\cdot {e^{-a\lambda}}" border="0"/>
+  <img src="http://latex.codecogs.com/gif.latex?\beta_i=p_i\cdot {e^{-a_i\lambda}}" border="0"/>
 </p>
 <p align="center">
 <img src="http://latex.codecogs.com/gif.latex?\lambda=\frac{\ln 2}{30}" border="0"/>
