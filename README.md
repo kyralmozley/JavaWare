@@ -11,7 +11,7 @@ JavaWare is a ransomware which will observe your system, learn which files you u
 ### :crystal_ball: How does it learn which files I use? 
 Maths. 
 
-It uses a metric called *freceny*[1] (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
+It uses a metric called *frecency*[1] (frequency + recency) to give each file a score. Using the idea of exponential decay, it ensures that most recently used files are scored higher, and as it observes your system over the course of a week, the more a file is accessed in this time, the higher the score. It then encrypts in such a way so that files that you are not likely to be using (i.e. low scored) first, this ensures that it can go as long as possible without being noticed, allowing it to encrypt the entire filesystem. 
 
 <p align="center">
   <img src="http://latex.codecogs.com/gif.latex?\gamma=\sum_{i=1}^n+\beta" border="0"/>
